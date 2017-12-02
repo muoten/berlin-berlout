@@ -6,3 +6,5 @@ Criteria of admission:
 - Denim clothes: jeans
 - No more than 3 people
 - Around 30s
+- No laughing
+
