@@ -1,21 +1,3 @@
-var refreshalId;
-
-function startLoader(){
-	let imageLoader = document.querySelector('#image-loader');
-
-	var index = 1;
-	refreshalId = setInterval(function(){
-		imageLoader.src = './img/loader/' + index + '.jpg';
-		index += 1;
-		if(index == 12) index = 1;
-	}, 250);
-}
-
-function stopLoader(){
-	clearInterval(refreshalId);
-	let imageLoader = document.querySelector('#image-loader');
-	imageLoader.src = '';
-}
 
 (function () {
 
@@ -70,7 +52,11 @@ function stopLoader(){
 	}
 
 	function pictureCallback(picture) {
-		console.log(picture);
+		//console.log(picture
+			console.log("calling initMap");
+		
+		initMap();
+		console.log("finish initMap");
 	}
 
 
