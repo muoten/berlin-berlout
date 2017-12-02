@@ -1,5 +1,5 @@
 # berlin-berlout
-Could you enter to a fashion disco or pub?
+Could you get into a berlin exclusive nightclub?
 
 Criteria of admission:
 - Dark clothes
