@@ -22,8 +22,10 @@ Released under the MIT license: http://jsbin.mit-license.org
   }
 </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
-<script src="https://js.arcgis.com/4.5/"></script>
-  
+<script src="https://js.arcgis.com/4.5/">
+</script>
+
+
   <script>
 require([
   "esri/Map",
@@ -31,54 +33,36 @@ require([
   "esri/layers/FeatureLayer",
   "dojo/domReady!"
 ], function(Map, MapView, FeatureLayer) {
-  
+
   var map = new Map({
     basemap: "topo-vector"
   });
 
+  var query = "rating>0";
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var query2 = urlParams.get('query');
+  if (query2)
+    query = query2
   // Challenge - Park and Open Space (Polygons)
   var featureLayer = new FeatureLayer({
     //url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Parks_and_Open_Space/FeatureServer",
 
-    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer",
-    outFields: ["*"],
-    popupTemplate: {
-      title: "{PARK_NAME}",
-      content: "{*}"
-    }
+    //url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer/0/query?where=rating%3D1",
+    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer/0/query?Where=rating%3D9&f=pjson",
+    //outFields: ["*"],
+    definitionExpression: query,
+
   });
-  
+
   map.add(featureLayer);
-  
-  // Challenge - Trails (Lines)
-  var featureLayer2 = new FeatureLayer({
-    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer",    outFields: ["*"],
-    popupTemplate: {
-      title: "{TRL_NAME}",
-      content: "{*}"
-    },
-    //definitionExpression: "ELEV_GAIN < 250" // Challenge
-  });
-  
-  map.add(featureLayer2);
-  
-  // Trail Heads (Points)
-  var featureLayer3 = new FeatureLayer({
-    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer",
-    outFields: ["TRL_NAME","CITY_JUR", "LAT", "LON"],
-    popupTemplate: {
-      title: "{TRL_NAME}",
-      content: "This trail is in {CITY_JUR} and located at {LAT}, {LON}."
-    }
-  });
-  
-  map.add(featureLayer3);
+
 
   var view = new MapView({
-    container: "viewDiv",  
+    container: "viewDiv",
     map: map,
     center: [13.40, 52.52],
-    zoom: 10                  
+    zoom: 10
   });
 
 });</script>
@@ -86,4 +70,4 @@ require([
 <body>
   <div id="viewDiv"></div>
 </body>
-</html> 
+</html>
