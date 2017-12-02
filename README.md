@@ -8,3 +8,4 @@ Criteria of admission:
 - Around 30s
 - No laughing
 
+![Map](images/map1.png)
