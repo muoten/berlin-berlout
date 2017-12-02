@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by anonymous (http://jsbin.com/yiwafadisi/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>DevLabs - Create a 2D map with a layer</title>
+<style>
+  html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+<script src="https://js.arcgis.com/4.5/"></script>
+  
+  <script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/FeatureLayer",
+  "dojo/domReady!"
+], function(Map, MapView, FeatureLayer) {
+  
+  var map = new Map({
+    basemap: "topo-vector"
+  });
+
+  // Challenge - Park and Open Space (Polygons)
+  var featureLayer = new FeatureLayer({
+    //url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Parks_and_Open_Space/FeatureServer",
+
+    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer",
+    outFields: ["*"],
+    popupTemplate: {
+      title: "{PARK_NAME}",
+      content: "{*}"
+    }
+  });
+  
+  map.add(featureLayer);
+  
+  // Challenge - Trails (Lines)
+  var featureLayer2 = new FeatureLayer({
+    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer",    outFields: ["*"],
+    popupTemplate: {
+      title: "{TRL_NAME}",
+      content: "{*}"
+    },
+    //definitionExpression: "ELEV_GAIN < 250" // Challenge
+  });
+  
+  map.add(featureLayer2);
+  
+  // Trail Heads (Points)
+  var featureLayer3 = new FeatureLayer({
+    url: "https://services.arcgis.com/Qo2anKIAMzIEkIJB/arcgis/rest/services/berlin_bars_pubs/FeatureServer",
+    outFields: ["TRL_NAME","CITY_JUR", "LAT", "LON"],
+    popupTemplate: {
+      title: "{TRL_NAME}",
+      content: "This trail is in {CITY_JUR} and located at {LAT}, {LON}."
+    }
+  });
+  
+  map.add(featureLayer3);
+
+  var view = new MapView({
+    container: "viewDiv",  
+    map: map,
+    center: [13.40, 52.52],
+    zoom: 10                  
+  });
+
+});</script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html> 
