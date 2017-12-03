@@ -56,7 +56,7 @@
 		callCV("86882cc06c9e44eda5b3b6a589234fa9", picture, function (res) {
 			var isBerlin = true;
 			console.log(res.description.tags);
-			if (res.description.tags.indexOf("smiling") != -1) or (res.description.tags.indexOf("glass") != -1)
+			if (res.description.tags.indexOf("smiling") != -1) || (res.description.tags.indexOf("glass") != -1)
 				isBerlin = false;
 			console.log(isBerlin);
 			initMap(isBerlin);
