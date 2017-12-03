@@ -56,7 +56,7 @@
 		callCV("86882cc06c9e44eda5b3b6a589234fa9", picture, function (res) {
 			var isBerlin = true;
 			console.log(res.description.tags);
-			if (res.description.tags.indexOf("smiling") != -1) || (res.description.tags.indexOf("glass") != -1)
+			if ((res.description.tags.indexOf("glass") != -1))
 				isBerlin = false;
 			console.log(isBerlin);
 			initMap(isBerlin);
@@ -69,8 +69,14 @@
 	function init() {
 		initCamera();
 
+		var reload = false;
 		document.querySelector('img.button').addEventListener('click', function() {
-			takePicture(pictureCallback);
+			if (reload) {
+				document.location.reload();
+			} else {
+				takePicture(pictureCallback);
+				reload = true;
+			}
 		});
 	}
 

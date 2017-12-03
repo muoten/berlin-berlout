@@ -11,7 +11,7 @@ var myMap = new Map({
   basemap: "topo-vector"
 });
 
-var query = "rating=1";
+var query = "rating=4 and code=2305";
 if (isBerlin == true)
   query = "rating>0"
 // Challenge - Park and Open Space (Polygons)

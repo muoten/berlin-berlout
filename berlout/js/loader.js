@@ -13,6 +13,7 @@ function startLoader(){
 
 function stopLoader(){
 	clearInterval(refreshalId);
-	let imageLoader = document.querySelector('#image-loader');
+	var imageLoader = document.querySelector('#image-loader');
 	imageLoader.src = '';
+	imageLoader.remove();
 }
