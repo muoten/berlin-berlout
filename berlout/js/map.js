@@ -25,17 +25,6 @@ var featureLayer = new FeatureLayer({
 
 map.add(featureLayer);
 
-var delay = ( function() {
-    var timer = 0;
-    return function(callback, ms) {
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
-    };
-})();
-/*
-var elem = document.getElementById('viewDiv');
-$(elem).hide();
-*/
 var view = new MapView({
   container: "viewDiv",
   map: map,
@@ -43,18 +32,10 @@ var view = new MapView({
   zoom: 10
 }).then(function(evt) {
 
-  delay(function(){
-      // do stuff
-  }, 10000 ); // end delay
-  //$(elem).show();
-/*
   setTimeout(function(){
-//do what you need here
-}, 4000);
-*/
-  stopLoader();
-});
+      stopLoader();
+  }, 2000);
 
 });
-
+});
 };
